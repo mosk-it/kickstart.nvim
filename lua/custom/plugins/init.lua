@@ -84,4 +84,13 @@ return {
   },
   { 'kevinhwang91/rnvimr' },
   { 'kevinhwang91/nvim-ufo' },
+  {
+    'chentoast/marks.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require('marks').setup {
+        refresh_interval = 12500,
+      }
+    end,
+  },
 }

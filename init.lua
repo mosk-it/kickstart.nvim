@@ -60,11 +60,13 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
+vim.opt.list = false
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 
--- TODO: figure out tab
--- vim.opt.listchars = {tab = '» '}
-vim.opt.listchars = { trail = '·', nbsp = '␣' }
+-- vim.opt.listchars = { trail = '·', nbsp = '␣' }
 vim.opt.showbreak = '└► '
 
 -- Preview substitutions live, as you type!
@@ -828,13 +830,19 @@ require('lazy').setup({
         show_icons = true,
 
         -- Function which formats the tab label
-        -- By default surrounds with space and possibly prepends with icon
-        -- format = nil,
+        format = function(buf_id, label)
+          local suffix = vim.bo[buf_id].modified and '*' or ' '
+          return string.gsub(MiniTabline.default_format(buf_id, label), '%s+$', '') .. suffix
+        end,
 
         -- Where to show tabpage section in case of multiple vim tabpages.
         -- One of 'left', 'right', 'none'.
         tabpage_section = 'left',
       }
+
+      vim.api.nvim_set_hl(0, 'MiniTablineCurrent', { bold = true, fg = 'black', bg = 'orange' })
+      vim.api.nvim_set_hl(0, 'MiniTablineModifiedCurrent', { fg = 'black', bg = 'orange', italic = true })
+      vim.api.nvim_set_hl(0, 'MiniTablineModifiedVisible', { italic = true })
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
