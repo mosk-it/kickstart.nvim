@@ -179,5 +179,67 @@ return {
   },
 
   { 'tpope/vim-fugitive' },
-    fold_virt_text_handler = handler
+  { -- Collection of various small independent plugins/modules
+    'echasnovski/mini.nvim',
+    config = function()
+      -- tpope/vim-surround like settings
+      require('mini.surround').setup {
+        mappings = {
+          add = 'ys',
+          delete = 'ds',
+          find = '',
+          find_left = '',
+          highlight = '',
+          replace = 'cs',
+          update_n_lines = '',
+
+          -- Add this only if you don't want to use extended mappings
+          suffix_last = '',
+          suffix_next = '',
+        },
+        search_method = 'cover_or_next',
+      }
+
+      vim.keymap.del('x', 'ys')
+      vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
+
+      -- require('mini.icons').setup()
+      require('mini.tabline').setup {
+        -- Whether to show file icons (requires 'mini.icons')
+        show_icons = true,
+
+        -- Function which formats the tab label
+        format = function(buf_id, label)
+          local suffix = vim.bo[buf_id].modified and '*' or ' '
+          return string.gsub(MiniTabline.default_format(buf_id, label), '%s+$', '') .. suffix
+        end,
+
+        -- Where to show tabpage section in case of multiple vim tabpages.
+        -- One of 'left', 'right', 'none'.
+        tabpage_section = 'left',
+      }
+
+      vim.api.nvim_set_hl(0, 'MiniTablineCurrent', { bold = true, fg = 'black', bg = 'orange' })
+      vim.api.nvim_set_hl(0, 'MiniTablineModifiedCurrent', { fg = 'black', bg = 'orange', italic = true })
+      vim.api.nvim_set_hl(0, 'MiniTablineModifiedVisible', { italic = true })
+
+      -- Simple and easy statusline.
+      --  You could remove this setup call if you don't like it,
+      --  and try some other statusline plugin
+      local statusline = require 'mini.statusline'
+      -- set use_icons to true if you have a Nerd Font
+      statusline.setup { use_icons = vim.g.have_nerd_font }
+
+      -- You can configure sections in the statusline by overriding their
+      -- default behavior. For example, here we set the section for
+      -- cursor location to LINE:COLUMN
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_location = function()
+        return '%2l:%-2v'
+      end
+
+      -- ... and there is more!
+      --  Check out: https://github.com/echasnovski/mini.nvim
+    end,
+  },
 }
