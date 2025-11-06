@@ -18,6 +18,6 @@ vim.opt.softtabstop = 4
 vim.opt.relativenumber = true
 vim.opt.mouse = ''
 
-vim.opt.showbreak = '└► '
+vim.o.showbreak = '⮡ '
 
 vim.cmd.colorscheme 'habamax'
