@@ -4,6 +4,7 @@ vim.cmd.colorscheme 'habamax'
 vim.opt.swapfile = false
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
+vim.opt.foldopen:remove("search")
 
 
 -- ????

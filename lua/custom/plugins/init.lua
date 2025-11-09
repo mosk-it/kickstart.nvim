@@ -37,6 +37,13 @@ return {
           t({ '', '#+END_SRC' }),
         }),
       })
+        ls.add_snippets('javascript', {
+            s('cl', { t 'console.log(', i(1, '%s'), t ')' }),
+        })
+
+        ls.add_snippets('typescript', {
+            s('cl', { t 'console.log(', i(1, '%s'), t ')' }),
+        })
     end,
   },
 
