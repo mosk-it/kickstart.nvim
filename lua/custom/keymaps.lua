@@ -9,6 +9,8 @@ vim.keymap.set('n', 'gy', '"*y', { desc = 'Copy to primary clipboard' })
 
 vim.keymap.set('n', '<C-s>', ':w<CR>', { desc = 'save' })
 
+vim.keymap.set('n', '<leader>-', '<cmd>lua MiniFiles.open()<CR>', { desc = 'Open MiniFiles' })
+
 vim.keymap.set('c', '<C-p>', '<Up>', { desc = '' })
 vim.keymap.set('c', '<C-n>', '<Down>', { desc = '' })
 vim.keymap.set('c', '<C-a>', '<Home>', { desc = '' })
@@ -89,6 +91,11 @@ end
 vim.keymap.set('n', 'zo', open_current_fold, { desc = 'Open current fold' })
 vim.keymap.set('n', 'zc', close_current_fold, { desc = 'Close current fold' })
 vim.keymap.set('n', 'za', toggle_current_fold, { desc = 'Toggle current fold' })
+vim.keymap.set('n', 'q:', '<nop>', { noremap = true, silent = true })
 
+vim.keymap.set('n', '<leader>yp', ":let @+=expand('%:.')<cr>", { desc = "Copy buffer's relative path" })
+vim.keymap.set('n', '<leader>yP', function()
+  vim.fn.setreg('+', vim.fn.expand('%:p'))
+end, { desc = "Copy buffer's absolute path" })
 
 return {}

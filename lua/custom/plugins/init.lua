@@ -95,19 +95,6 @@ return {
     end,
   },
   {
-    'simonmclean/triptych.nvim',
-    event = 'VeryLazy',
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'nvim-tree/nvim-web-devicons', -- optional for icons
-      -- 'antosha417/nvim-lsp-file-operations', -- optional LSP integration
-    },
-    opts = {}, -- config options here
-    keys = {
-      { '<leader>-', ':Triptych<CR>' },
-    },
-  },
-  {
     { 'christoomey/vim-tmux-navigator' },
   },
   {
@@ -186,6 +173,7 @@ return {
   },
 
   { 'tpope/vim-fugitive' },
+
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -206,6 +194,48 @@ return {
         },
         search_method = 'cover_or_next',
       }
+
+
+      local show_dotfiles = false
+      local filter_show_all = function(fs_entry) return true end
+      local filter_hide_dotfiles = function(fs_entry) return not vim.startswith(fs_entry.name, '.') end
+
+      local toggle_dotfiles = function()
+        show_dotfiles = not show_dotfiles
+        local new_filter = show_dotfiles and filter_show or filter_hide_dotfiles
+        MiniFiles.refresh({ content = { filter = new_filter } })
+      end
+
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniFilesBufferCreate',
+        callback = function(args)
+          local buf_id = args.data.buf_id
+          vim.keymap.set('n', 'g.', toggle_dotfiles, { buffer = buf_id })
+        end,
+      })
+
+
+
+
+      require('mini.files').setup({
+        content = {
+          -- Predicate for which file system entries to show
+          filter = filter_hide_dotfiles
+        },
+        windows = {
+          preview = true,  -- Disable third preview column
+          gap = 0,          -- Space between columns
+          width_focus = 40,
+          width_nofocus = 25,
+          width_preview = 40,
+        },
+        options = {
+          use_icons = false, -- Optional: Enable file icons
+        },
+        mappings = {
+          go_in_plus  = '<CR>'
+        }
+      })
 
       vim.keymap.del('x', 'ys')
       vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
