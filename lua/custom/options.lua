@@ -46,3 +46,6 @@ vim.api.nvim_create_autocmd({"WinLeave", "BufLeave"}, {
         vim.opt_local.cursorline = false
     end
 })
+
+vim.opt.list = true
+vim.opt.listchars:append({ trail = '▓' })
