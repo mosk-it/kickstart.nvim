@@ -279,4 +279,27 @@ return {
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+
+{
+  "lukas-reineke/indent-blankline.nvim",
+  opts = {
+    indent = {
+      char = " ", -- The left-aligned triangle dot
+      highlight = "LineNr", -- Dim color for all other lines
+    },
+    scope = {
+        enabled = true, -- Turns on the feature for the cursor's line
+        char = "╎",     -- Use the same dot (consistency)
+        highlight = "Comment", -- Slightly brighter color for current scope
+       show_start = false,
+       show_end = false,
+        include = {
+          node_type = {
+            python = { "for_statement", "while_statement", "if_statement", "with_statement", "try_statement", "class_definition", "function_definition" },
+            lua = { "table_constructor", "function_declaration", "if_statement", "for_statement", "while_statement" },
+          }
+        },
+      },
+    }
+  }
 }
