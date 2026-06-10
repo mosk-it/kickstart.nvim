@@ -31,6 +31,8 @@ vim.keymap.set('i', '<C-e>', '<C-O>$', { desc = '' })
 vim.keymap.set('i', '<C-f>', '<C-O>l', { desc = '' })
 vim.keymap.set('i', '<C-b>', '<C-O>h', { desc = '' })
 
+vim.keymap.set('n', '<C-q>', ':bd<CR>', { remap = true, silent = true })
+
 vim.keymap.set('c', '<C-e>', '<End>', { desc = '', remap = true })
 
 vim.keymap.set('n', '<C-b>', '15<C-Y>', { remap = true, silent = true })
