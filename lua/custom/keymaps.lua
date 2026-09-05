@@ -95,6 +95,8 @@ vim.keymap.set('n', 'zc', close_current_fold, { desc = 'Close current fold' })
 vim.keymap.set('n', 'za', toggle_current_fold, { desc = 'Toggle current fold' })
 vim.keymap.set('n', 'q:', '<nop>', { noremap = true, silent = true })
 
+vim.keymap.set('v', 'r', '"_dP', { noremap = true, silent = true })
+
 vim.keymap.set('n', '<leader>yp', ":let @+=expand('%:.')<cr>", { desc = "Copy buffer's relative path" })
 vim.keymap.set('n', '<leader>yP', function()
   vim.fn.setreg('+', vim.fn.expand('%:p'))
