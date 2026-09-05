@@ -1,6 +1,6 @@
 vim.opt.relativenumber = true
 vim.opt.mouse = ''
-vim.cmd.colorscheme 'habamax'
+-- vim.cmd.colorscheme 'catppuccin'
 vim.opt.swapfile = false
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
@@ -21,7 +21,6 @@ vim.opt.mouse = ''
 
 vim.o.showbreak = '⮡ '
 
-vim.cmd.colorscheme 'habamax'
 
 vim.api.nvim_create_autocmd("BufReadPost", {
     callback = function(args)

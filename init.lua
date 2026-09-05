@@ -7,6 +7,8 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+vim.cmd.colorscheme 'catppuccin'
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -669,7 +671,7 @@ require('lazy').setup({
 
   { -- Autoformat
     'stevearc/conform.nvim',
-    event = { 'BufWritePre' },
+    event = { },
     cmd = { 'ConformInfo' },
     keys = {
       {
@@ -682,6 +684,7 @@ require('lazy').setup({
       },
     },
     opts = {
+      format_on_save = false,
       notify_on_error = false,
       -- format_on_save = function(bufnr)
       --   -- Disable "format_on_save lsp_fallback" for languages that don't
@@ -933,6 +936,7 @@ require('lazy').setup({
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
 }, {
+  change_detection = { notify = false },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
